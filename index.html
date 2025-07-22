@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Mundo de Guito_064</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #2c2c2c;
+            --dirt-block-bg: #835432;
+            --grass-block-top: #6A9B3A;
+            --stone-block-bg: #7f7f7f;
+            --stone-border: #6a6a6a;
+            --text-color: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.4);
+            --pixel-border-color-light: #c0c0c0;
+            --pixel-border-color-dark: #555555;
+        }
+
+        body {
+            font-family: 'VT323', monospace;
+            background-color: var(--bg-color);
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            color: var(--text-color);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .world-container {
+            max-width: 900px;
+            width: 100%;
+            background-color: var(--dirt-block-bg);
+            border: 5px solid #5a3a22;
+            box-shadow: 0 0 20px var(--shadow-color);
+            padding: 15px;
+        }
+        
+        .grass-top {
+            background-color: var(--grass-block-top);
+            padding: 10px;
+            border-bottom: 5px solid #5a3a22;
+            margin: -15px -15px 20px -15px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .avatar-container {
+            width: 150px;
+            height: 150px;
+            border: 4px solid var(--pixel-border-color-dark);
+            box-shadow: 
+                inset 4px 4px 0px var(--pixel-border-color-light), 
+                inset -4px -4px 0px var(--pixel-border-color-dark);
+            background-color: #c6c6c6;
+            padding: 5px;
+            image-rendering: pixelated;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            background-image: url('https://s.namemc.com/3d/skin/body.png?id=4f0a767f1000c69a&model=classic');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        header h1 {
+            font-size: 3em;
+            margin: 15px 0 5px 0;
+            text-shadow: 3px 3px 0px var(--shadow-color);
+        }
+
+        header p {
+            font-size: 1.5em;
+            max-width: 600px;
+        }
+
+        .section {
+            background-color: var(--stone-block-bg);
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 4px solid var(--pixel-border-color-dark);
+            box-shadow: 
+                inset 4px 4px 0px var(--pixel-border-color-light), 
+                inset -4px -4px 0px var(--pixel-border-color-dark);
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-top: 0;
+            border-bottom: 4px solid var(--pixel-border-color-dark);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .skills-chest {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .skill-item {
+            background-color: #9a9a9a;
+            padding: 10px 20px;
+            font-size: 1.3em;
+            border: 3px solid var(--pixel-border-color-dark);
+            box-shadow: 3px 3px 0 var(--pixel-border-color-dark);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .skill-item:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 0 0 0 var(--pixel-border-color-dark);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .project-card {
+            background-color: #9a9a9a;
+            border: 3px solid var(--pixel-border-color-dark);
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .project-card h3 {
+            font-size: 1.8em;
+            margin: 0 0 10px 0;
+        }
+
+        .project-card p {
+            font-size: 1.2em;
+            flex-grow: 1;
+        }
+
+        .project-link {
+            display: inline-block;
+            background-color: #3a869b;
+            color: var(--text-color);
+            padding: 10px 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            text-align: center;
+            border: 3px solid #2a6372;
+            box-shadow: 3px 3px 0 #2a6372;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .project-link:hover {
+            transform: translate(3px, 3px);
+            box-shadow: 0 0 0 #2a6372;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .contact-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 1.5em;
+            transition: transform 0.2s;
+        }
+
+        .contact-link:hover {
+            transform: scale(1.1);
+            text-shadow: 2px 2px 5px var(--shadow-color);
+        }
+        
+        footer {
+            text-align: center;
+            font-size: 1em;
+            padding: 15px 0 0 0;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="world-container">
+        <div class="grass-top"></div>
+        <header>
+            <div class="avatar-container">
+                <div class="avatar"></div>
+            </div>
+            <h1>El Mundo de Guito_064</h1>
+            <p>¡Hola! Soy un estudiante de bachillerato apasionado por el mundo de la tecnología y el análisis de datos. Exploro constantemente nuevas herramientas para construir proyectos innovadores. ¡Bienvenido a mi mundo digital!</p>
+        </header>
+
+        <main>
+            <section class="section">
+                <h2>🧰 Cofre de Habilidades</h2>
+                <div class="skills-chest">
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">SQL</span>
+                    <span class="skill-item">Pandas</span>
+                    <span class="skill-item">JavaScript</span>
+                    <span class="skill-item">HTML</span>
+                    <span class="skill-item">CSS</span>
+                    <span class="skill-item">Git</span>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🏰 Construcciones Épicas</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Logicap.Ai</h3>
+                        <p>Una plataforma de aprendizaje inteligente que utiliza la lógica para personalizar la experiencia educativa.</p>
+                        <a href="#" class="project-link">Explorar (Próximamente)</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Learning Hub</h3>
+                        <p>Un centro de aprendizaje centralizado, creado para organizar y acceder a recursos educativos de manera eficiente.</p>
+                        <a href="https://github.com/Guito1624/xfavor" target="_blank" class="project-link">Ver en GitHub</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2>🗺️ Portales de Contacto</h2>
+                <div class="contact-links">
+                    <a href="https://github.com/Guito1624" target="_blank" class="contact-link">GitHub</a>
+                    <a href="https://www.instagram.com/tupycxzular" target="_blank" class="contact-link">Instagram</a>
+                    <a href="mailto:tomascardenasblandon@gmail.com" class="contact-link">Email</a>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Crafteado con 💚 por Guito_064. Diseño inspirado en Minecraft.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
